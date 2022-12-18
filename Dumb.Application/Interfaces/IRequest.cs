@@ -2,7 +2,7 @@
 
 namespace Dumb.Application.Interfaces
 {
-    public interface IRequest<T>
+    public interface IRequest
     {
         public BaseDto InitializeAndLoad();
     }

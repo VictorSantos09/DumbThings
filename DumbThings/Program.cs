@@ -9,7 +9,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<BoredService>();
+builder.Services.AddSingleton<CatFactService>();
 builder.Services.AddSingleton<JokeService>();
+builder.Services.AddSingleton<NameAndGenderService>();
+builder.Services.AddSingleton<RandomDogService>();
 
 var app = builder.Build();
 

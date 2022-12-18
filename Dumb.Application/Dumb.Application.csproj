@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dto\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Dumb.Domain\Dumb.Domain.csproj" />
   </ItemGroup>
 
