@@ -13,7 +13,7 @@ namespace Dumb.Application.Services
         }
         public BaseDto InitializeAndLoad()
         {
-           var result = _service.InitializeAndLoad("https://official-joke-api.appspot.com/random_joke", new JokeEntity());
+            var result = _service.InitializeAndLoad("https://official-joke-api.appspot.com/random_joke", new JokeEntity());
 
             return new BaseDto(result._StatusCode, result._Data == null ? new { Message = result._Message } : result._Data);
         }

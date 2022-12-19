@@ -26,13 +26,6 @@ namespace DumbThings.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllDumbThings")]
-        public void GetAll()
-        {
-
-        }
-
-        [HttpGet]
         [Route("GetJoke")]
         public IActionResult GetJoke()
         {
@@ -67,8 +60,8 @@ namespace DumbThings.Controllers
         }
 
         [HttpPost]
-        [Route("GetGenderAndName")]
-        public IActionResult GetGenderAndName(UserToSupposeDto supposeDto)
+        [Route("GetGenderAndAge")]
+        public IActionResult GetGenderAge(UserToSupposeDto supposeDto)
         {
             var result = _nameAndGenderService.InitializeAndLoad(supposeDto.Name);
 
