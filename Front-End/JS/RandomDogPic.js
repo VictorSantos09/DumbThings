@@ -1,7 +1,4 @@
-
-const GetRandomDog = async function () {
-
-
+const GetRandomDog = async function (){
     const req = await fetch("https://localhost:7205/DumbThings/GetRandomDog",
         {
             headers: {

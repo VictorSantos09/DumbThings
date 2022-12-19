@@ -14,11 +14,11 @@
 
     <link rel="stylesheet" href="/CSS/mainStyle.css">
     <link rel="stylesheet" href="/CSS/home.css">
-    <title>Dumb Things</title>
+
+    <title>Guess About You</title>
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container">
             <div class="container-fluid">
@@ -47,7 +47,8 @@
                                 <li><a class="dropdown-item capitalize" href="#">random dog picture</a></li>
                                 <li><a class="dropdown-item capitalize" href="DumbJokes.html">hear a joke</a></li>
                                 <li><a class="dropdown-item capitalize" href="#">activity do to when bored</a></li>
-                                <li><a class="dropdown-item capitalize" href="GuessAbtYou.html">let me guess about u</a></li>
+                                <li><a class="dropdown-item capitalize" href="GuessAbtYou.html">let me guess about u</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -56,22 +57,16 @@
         </div>
     </nav>
 
+    <input type="text" name="inputName" placeholder="Type your name, dumb" id="inputName">
+    <input type="button" value="Send" id="inputButton">
+
     <div>
-        <div>
-            <h1 class="capitalize">What are u wainting for</h1>
-        </div>
-        <div>
-            <h2 class="capitalize">do something :(</h2>
-        </div>
-
-    </div>
-    <div id="contentDog">
-        <div>
-            <h3>See Random Dog PICs</h3>
-        </div>
+        <h3 id="resultName"></h3>
+        <h3 id="resultAge"></h3>
+        <h3 id="resultGender"></h3>
     </div>
 
-    <script src="/JS/RandomDogPic.js"></script>
+    <script src="/JS/GuessUser.js"></script>
 </body>
 
 </html>
