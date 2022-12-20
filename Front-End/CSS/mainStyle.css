@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: rgb(34, 21, 7);
+    background-color: #ff8518;
 }
 
 h1,
@@ -19,6 +19,14 @@ a {
     color: white;
 }
 
-.capitalize {
-    text-transform: capitalize;
+.nav-size{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    font-size:1.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #160dce;
+}
+.content-spacing{
+word-spacing: 5rem;
 }

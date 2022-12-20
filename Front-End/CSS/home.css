@@ -1,0 +1,57 @@
+.font-white {
+    color: white;
+}
+
+.content-rick-morty {
+    margin-top: 80px;
+    background-color: red;
+    display: flex;
+    align-items: flex-end;
+}
+
+.content-font {
+    text-transform: capitalize;
+    font-weight: bold;
+    padding-right: 50px;
+    text-decoration: underline 1px;
+    text-underline-offset: 5px;
+}
+
+.content-right {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    right: 0;
+    margin-right: 80px;
+}
+
+.content-left {
+    display: flex;
+    align-items: baseline;
+    position: fixed;
+    left: 0;
+    margin-left: 80px;
+}
+
+.content-background {
+    background-color: black;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    padding: 5%;
+    width: fit-content;
+}
+
+.img-size {
+    height: 300px;
+    width: 300px;
+}
+.border-syle{
+    border-bottom: 5px solid;
+    border-left: 5px solid;
+    border-width: 8px;
+    border-color: white;
+}
+.separe{
+    padding-right: 100px;
+}
