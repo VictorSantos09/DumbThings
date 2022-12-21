@@ -23,6 +23,9 @@ li {
     text-transform: uppercase;
     font-weight: bold;
     background-color: #402B1E;
+    border-bottom: 5px solid;
+    border-width: 8px;
+    border-color: #80563B;
 }
 
 .content-spacing {
@@ -34,18 +37,6 @@ li {
     margin-top: 0;
 }
 
-.about-background {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: fit-content;
-    background-color: #402B1E;
-    color: #80563B;
-    text-align: justify;
-    border-top: 5px solid;
-    border-width: 8px;
-}
 
 .information {
     font-size: 2rem;
@@ -61,4 +52,21 @@ li {
 .about-space {
     color: white;
     padding: 1rem;
+}
+
+.font-white {
+    color: white;
+}
+
+.footer-container{
+    border-top: 5px solid;
+    border-width: 8px;
+    border-color: #80563B;
+display: block;
+width: 100%;
+height: auto;
+justify-content: flex-end;
+}
+.footer-content{
+    background-color: #402B1E;
 }
