@@ -1,0 +1,40 @@
+
+.content-background {
+    background-color: black;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    padding: 5%;
+    width: fit-content;
+}
+
+.content-description {
+    font-style: italic;
+    padding-top: 0.3rem;
+}
+
+
+.effect-hover:hover {
+    background-color: #595959;
+}
+
+
+.content-margin-color {
+    background-color: gray;
+}
+
+.img-size {
+    height: 300px;
+    width: 300px;
+}
+
+.border-style {
+    border-bottom: 5px solid;
+    border-left: 5px solid;
+    border-width: 8px;
+    border-color: #404040;
+}
+
+.my-margin-content{
+    margin-top: 10rem;
+}
