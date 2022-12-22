@@ -3,16 +3,6 @@
 
 DumbThings é um site de entretenimento com utilização de aplicações externas, 
 um tipico site aleatorio de internet. Work In Progress
-## Documentação de cores
-
-| Cor               | Hexadecimal                                                |
-| ----------------- | ---------------------------------------------------------------- |
-|Color 1      | ![#363636](https://via.placeholder.com/10/363636?text=+) #363636 |
-|Color 2       | ![#707070](https://via.placeholder.com/10/707070?text=+) #707070 |
-|Color 3       | ![#999999](https://via.placeholder.com/10/999999?text=+) #999999 |
-|Color 4      | ![#C4C4C4](https://via.placeholder.com/10/C4C4C4?text=+) #C4C4C4 |
-|Color 5     | ![#D9D9D9](https://via.placeholder.com/10/D9D9D9?text=+) #D9D9D9 |
-
 
 ## Funcionalidades
 
