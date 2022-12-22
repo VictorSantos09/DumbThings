@@ -23,6 +23,6 @@ const GuessUser = async function () {
     document.getElementById("resultAge").innerHTML = age.concat(result.age)
     document.getElementById("resultGender").innerHTML = gender.concat(result.gender)
 
-    setTimeout(function () { alert("Congrats " + result.name + " you are a " + result.gender + " of " + result.age + " years old"); }, 100);
+    setTimeout(function () { alert("Congrats " + result.name + " You are a " + result.gender + " Of " + result.age + " Years Old"); }, 50);
 }
 buttonReq.addEventListener("click", () => GuessUser())
