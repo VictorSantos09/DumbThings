@@ -20,12 +20,15 @@ li {
     padding-top: 25px;
     padding-bottom: 25px;
     font-size: 1.5rem;
-    background-color: #402B1E;
+    background-color: #262626;
     border-bottom: 5px solid;
     border-width: 8px;
-    border-color: #80563B;
+    border-color: #404040;
 }
 
+.my-nav-space{
+    padding-right: 50px;
+}
 
 .dropdown:hover .dropdown-menu {
     display: block;
@@ -35,6 +38,6 @@ li {
 .footer-border {
     border-top: 5px solid;
     border-width: 8px;
-    border-color: #80563B;
-    background-color: #402B1E;
+    border-color: #404040;
+    background-color: #262626;
 }
