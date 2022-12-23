@@ -1,5 +1,6 @@
 ﻿using Application.Dto;
 using Dumb.Application.Interfaces;
+using System.Net;
 using System.Net.Http.Headers;
 using static Dumb.Domain.Entities.ApiHelper;
 
@@ -15,6 +16,8 @@ namespace Dumb.Application.Services
         }
         public async Task<T> LoadContent<T>(string url, T entity)
         {
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             using (HttpResponseMessage response = await ApiClient.GetAsync(url))
             {
                 if (response.IsSuccessStatusCode)
