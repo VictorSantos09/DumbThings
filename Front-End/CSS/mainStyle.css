@@ -43,7 +43,11 @@ li {
 }
 
 .my-margin-content {
-    margin-top: 10rem;
+    margin-top: 12rem;
+}
+
+.my-margin-content-bottom {
+    margin-bottom: 12rem;
 }
 
 .my-background-color{
