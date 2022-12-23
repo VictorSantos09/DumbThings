@@ -14,11 +14,11 @@ const GetRandomDog = async function (){
     var elem = document.createElement("img");
 
     elem.setAttribute("src", result.message);
-    elem.setAttribute("height", "500");
-    elem.setAttribute("width", "500");
-    elem.setAttribute("alt", "randomDogPic");
+    elem.setAttribute("height", "300");
+    elem.setAttribute("width", "300");
+    elem.setAttribute("alt", "Random Dog Picture");
 
-    document.getElementById("contentDog").appendChild(elem);
+    document.getElementById("image-dog-placeholder").appendChild(elem);
 }
 
 GetRandomDog()
