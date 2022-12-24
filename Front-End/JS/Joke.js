@@ -14,8 +14,6 @@ const GetJoke = async function (id) {
 
     const div = document.createElement("div")
 
-    document.getElementById("jokesSection").style.display = "flex"
-    document.getElementById("SeeNewJokes").style.display = "flex"
     const h3Start = document.createElement("h3").innerHTML = "Dumb Question: ".concat(result.setup)
     const h3SEnd = document.createElement("h3").innerHTML = "Dumber Answer: ".concat(result.punchline)
     const br = document.createElement("br")
