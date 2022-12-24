@@ -15,7 +15,7 @@ const GetRandomDog = async function (id) {
 
     document.getElementById(id).setAttribute("src", result.message);
     document.getElementById(id).setAttribute("alt", "Random Dog Picture");
-    document.getElementById(id).setAttribute("class", "img-size-dog");
+    document.getElementById(id).setAttribute("class", "img-size-dog d-block");
 }
 
 function CallAll() {
