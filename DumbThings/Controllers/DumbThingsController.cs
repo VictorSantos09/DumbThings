@@ -14,15 +14,17 @@ namespace DumbThings.Controllers
         private readonly RandomDogService _randomDogService;
         private readonly BoredService _boredService;
         private readonly NameAndGenderService _nameAndGenderService;
+        private readonly RickAndMortyService _rickAndMortyService;
 
         public DumbThingsController(JokeService jokeService, CatFactService catFactService, RandomDogService randomDogService,
-            BoredService boredService, NameAndGenderService nameAndGenderService)
+            BoredService boredService, NameAndGenderService nameAndGenderService, RickAndMortyService rickAndMortyService)
         {
             _jokeService = jokeService;
             _catFactService = catFactService;
             _randomDogService = randomDogService;
             _boredService = boredService;
             _nameAndGenderService = nameAndGenderService;
+            _rickAndMortyService = rickAndMortyService;
         }
 
         [HttpGet]
@@ -66,6 +68,14 @@ namespace DumbThings.Controllers
             var result = _nameAndGenderService.InitializeAndLoad(supposeDto.Name);
 
             return StatusCode(result._StatusCode, result._Data == null ? new { Message = result._Message } : result._Data);
+        }
+        [HttpPost]
+        [Route("GetRickAndMorty")]
+        public IActionResult GetRickAndMorty()
+        {
+            var result = _rickAndMortyService.InitializeAndLoad();
+
+            return StatusCode(result._StatusCode, result._Data);
         }
     }
 }

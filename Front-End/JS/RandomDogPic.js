@@ -14,10 +14,8 @@ const GetRandomDog = async function (id) {
     const result = await req.json();
 
     document.getElementById(id).setAttribute("src", result.message);
-    document.getElementById(id).setAttribute("height", "300");
-    document.getElementById(id).setAttribute("width", "300");
     document.getElementById(id).setAttribute("alt", "Random Dog Picture");
-    document.getElementById(id).setAttribute("class", "border-style");
+    document.getElementById(id).setAttribute("class", "img-size-dog d-block");
 }
 
 function CallAll() {
