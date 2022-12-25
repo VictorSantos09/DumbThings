@@ -14,6 +14,7 @@ builder.Services.AddSingleton<CatFactService>();
 builder.Services.AddSingleton<JokeService>();
 builder.Services.AddSingleton<NameAndGenderService>();
 builder.Services.AddSingleton<RandomDogService>();
+builder.Services.AddSingleton<RickAndMortyService>();
 
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {

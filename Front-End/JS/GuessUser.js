@@ -15,11 +15,9 @@ const GuessUser = async function () {
 
     const result = await req.json();
 
-    const resultSpace = document.getElementById("resultGuess").style.display = 'block'
-
-    const name = " Name: "
-    const age = "Age: "
-    const gender = "Gender: "
+    const name = " NAME: "
+    const age = "AGE: "
+    const gender = "GENDER: "
 
 
     document.getElementById("resultName").innerHTML = name.concat(result.name)

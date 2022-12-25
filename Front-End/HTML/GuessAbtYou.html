@@ -13,6 +13,7 @@
         crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/CSS/mainStyle.css">
+    <link rel="stylesheet" href="/CSS/guessUser.css">
 
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
@@ -30,7 +31,7 @@
     </div>
 
     <section class="container my-margin-content">
-        <div class="d-flex justify-content-xxl-start justify-content-md-center">
+        <div class="d-flex justify-content-xxl-start justify-content-lg-start justify-content-center">
             <div class="form-floating mb-5 my-background-color border border-dark rounded">
                 <div class="m-2 p-3">
                     <input type="text" name="inputName" placeholder="Type your name"
@@ -51,23 +52,22 @@
     </div>
 -->
 
-    <section class="container " id="resultGuess" style="display: none;">
-        <div>
-            <div class="d-flex justify-content-xxl-start justify-content-md-center">
-                <div class="w-50 pt-5">
-                    <div class="my-background-color p-3 border border-dark rounded">
-                        <div class="text-capitalize">
-                            <h3 id="resultName"></h3>
-                            <h3 id="resultAge"></h3>
-                            <h3 id="resultGender"></h3>
-                        </div>
+    <section class="container" id="resultGuess">
+        <div class="d-flex justify-content-xxl-start justify-content-lg-start justify-content-center">
+            <div class="pt-5">
+                <div class="my-background-color container p-3 border border-dark rounded">
+                    <div class="text-capitalize">
+                        <h3 class="d-flex justify-content-center pb-1 fw-bold">YOUR RESULT</h3>
+                        <h3 id="resultName"></h3>
+                        <h3 id="resultAge"></h3>
+                        <h3 id="resultGender"></h3>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="fixed-bottom" id="footer-placeholder">
+    <div id="footer-placeholder">
 
     </div>
 
