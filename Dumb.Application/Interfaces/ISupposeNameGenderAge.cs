@@ -7,5 +7,7 @@ namespace Dumb.Application.Interfaces
         public BaseDto InitializeAndLoad(string name);
         public string? LoadGender(string name);
         public int? LoadAge(string name);
+        public string UrlAge { get; }
+        public string UrlGender { get; }
     }
 }

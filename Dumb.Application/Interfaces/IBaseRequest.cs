@@ -6,7 +6,7 @@ namespace Dumb.Application.Interfaces
     /// Assina os contratos de APIs para inicializar e buscar conteúdos, Adicione herança com BaseService para acessar InitializeClient
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IBaseRequest<T>
+    public interface IBaseRequest
     {
         public void InitializeClient();
         public Task<T> LoadContent<T>(string url, T _entity);

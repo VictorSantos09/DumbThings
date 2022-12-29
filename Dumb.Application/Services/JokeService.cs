@@ -4,16 +4,19 @@ using Dumb.Domain.Entities;
 
 namespace Dumb.Application.Services
 {
-    public class JokeService : IRequest
+    public class JokeService : IServiceRequest
     {
-        private readonly BaseService<JokeEntity> _service;
-        public JokeService()
+        private readonly IBaseRequest _service;
+        public string URL { get; private set; } = "https://official-joke-api.appspot.com/random_joke";
+
+        public JokeService(IBaseRequest service)
         {
-            _service = new BaseService<JokeEntity>();
+            _service = service;
         }
+
         public BaseDto InitializeAndLoad()
         {
-            var result = _service.InitializeAndLoad("https://official-joke-api.appspot.com/random_joke", new JokeEntity());
+            var result = _service.InitializeAndLoad(URL, new JokeEntity());
 
             return new BaseDto(result._StatusCode, result._Data == null ? new { Message = result._Message } : result._Data);
         }

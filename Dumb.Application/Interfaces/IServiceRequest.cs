@@ -2,8 +2,9 @@
 
 namespace Dumb.Application.Interfaces
 {
-    public interface IRequest
+    public interface IServiceRequest
     {
         public BaseDto InitializeAndLoad();
+        string URL { get; }
     }
 }

@@ -1,16 +1,19 @@
 ﻿using Application.Dto;
 using Dumb.Application.Interfaces;
 using Dumb.Domain.Entities;
+using static System.Net.WebRequestMethods;
 
 namespace Dumb.Application.Services
 {
     public class NameAndGenderService : ISupposeNameGenderAge
     {
-        private readonly BaseService<SupposeUserEntity> _service;
+        private readonly IBaseRequest _service;
+        public string UrlGender { get; private set; } = "https://api.genderize.io?name=";
+        public string UrlAge { get; private set; } = "https://api.agify.io?name=";
 
-        public NameAndGenderService()
+        public NameAndGenderService(IBaseRequest baseRequest)
         {
-            _service = new BaseService<SupposeUserEntity>();
+            _service = baseRequest;
         }
 
         public BaseDto InitializeAndLoad(string name)
@@ -31,11 +34,11 @@ namespace Dumb.Application.Services
         }
         public string? LoadGender(string name)
         {
-            return _service.LoadContent($"https://api.genderize.io?name={name}", new SupposeUserEntity()).GetAwaiter().GetResult().Gender;
+            return _service.LoadContent($"{UrlGender}{name}", new SupposeUserEntity()).GetAwaiter().GetResult().Gender;
         }
         public int? LoadAge(string name)
         {
-            return _service.LoadContent($"https://api.agify.io?name={name}", new SupposeUserEntity()).GetAwaiter().GetResult().Age;
+            return _service.LoadContent($"{UrlAge}{name}", new SupposeUserEntity()).GetAwaiter().GetResult().Age;
         }
     }
 }
