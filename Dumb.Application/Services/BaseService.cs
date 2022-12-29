@@ -6,7 +6,7 @@ using static Dumb.Domain.Entities.ApiHelper;
 
 namespace Dumb.Application.Services
 {
-    public class BaseService<T> : IBaseRequest<T>
+    public class BaseService : IBaseRequest
     {
         public void InitializeClient()
         {

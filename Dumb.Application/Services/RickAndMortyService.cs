@@ -5,17 +5,18 @@ using Dumb.Domain.Entities;
 
 namespace Dumb.Application.Services
 {
-    public class RickAndMortyService : IRequest
+    public class RickAndMortyService : IServiceRequest
     {
-        private readonly BaseService<RickAndMortyEntity> _service;
+        private readonly IBaseRequest _service;
         private readonly List<object> _caracteres;
         private object _wrongCharacter1;
         private object _wrongCharacter2;
         private object _correctCharacter;
+        public string URL { get; private set; } = "https://rickandmortyapi.com/api/character/";
 
-        public RickAndMortyService()
+        public RickAndMortyService(IBaseRequest baseRequest)
         {
-            _service = new BaseService<RickAndMortyEntity>();
+            _service = baseRequest;
             _caracteres = new List<object>();
             _wrongCharacter1 = new object();
             _wrongCharacter2 = new object();
@@ -27,6 +28,7 @@ namespace Dumb.Application.Services
             _caracteres.Clear();
 
             var caracteres = Get3Caracteres();
+
             SelectCorrectChoice();
 
             return new BaseDto(caracteres._StatusCode, new RickAndMortyDto(_wrongCharacter1, _wrongCharacter2, _correctCharacter));
@@ -35,9 +37,9 @@ namespace Dumb.Application.Services
         {
             var index = 0;
 
-            var result1 = _service.InitializeAndLoad($"https://rickandmortyapi.com/api/character/{caracteres[index++]}", new RickAndMortyEntity());
-            var result2 = _service.InitializeAndLoad($"https://rickandmortyapi.com/api/character/{caracteres[index++]}", new RickAndMortyEntity());
-            var result3 = _service.InitializeAndLoad($"https://rickandmortyapi.com/api/character/{caracteres[index++]}", new RickAndMortyEntity());
+            var result1 = _service.InitializeAndLoad($"{URL}{caracteres[index++]}", new RickAndMortyEntity());
+            var result2 = _service.InitializeAndLoad($"{URL}{caracteres[index++]}", new RickAndMortyEntity());
+            var result3 = _service.InitializeAndLoad($"{URL}{caracteres[index++]}", new RickAndMortyEntity());
 
             _caracteres.Add(result1._Data);
             _caracteres.Add(result2._Data);

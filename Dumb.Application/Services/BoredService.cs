@@ -4,18 +4,19 @@ using Dumb.Domain.Entities;
 
 namespace Dumb.Application.Services
 {
-    public class BoredService : IRequest
+    public class BoredService : IServiceRequest
     {
-        private readonly BaseService<BoredEntity> _service;
+        private readonly IBaseRequest _service;
+        public string URL { get; private set; } = "https://www.boredapi.com/api/activity";
 
-        public BoredService()
+        public BoredService(IBaseRequest baseRequest)
         {
-            _service = new BaseService<BoredEntity>();
+            _service = baseRequest;
         }
 
         public BaseDto InitializeAndLoad()
         {
-            var result = _service.InitializeAndLoad("https://www.boredapi.com/api/activity", new BoredEntity());
+            var result = _service.InitializeAndLoad(URL, new BoredEntity());
 
             return new BaseDto(result._StatusCode, result._Data == null ? new { Message = result._Message } : result._Data);
         }

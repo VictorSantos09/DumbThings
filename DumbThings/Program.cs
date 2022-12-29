@@ -1,4 +1,6 @@
+using Dumb.Application.Interfaces;
 using Dumb.Application.Services;
+using DumbThings.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,12 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<BoredService>();
-builder.Services.AddSingleton<CatFactService>();
-builder.Services.AddSingleton<JokeService>();
-builder.Services.AddSingleton<NameAndGenderService>();
-builder.Services.AddSingleton<RandomDogService>();
-builder.Services.AddSingleton<RickAndMortyService>();
+builder.Services.AddSingleton<BaseService>();
 
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {

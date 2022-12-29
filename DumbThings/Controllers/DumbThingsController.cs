@@ -1,4 +1,5 @@
 using Dumb.Application.Dto;
+using Dumb.Application.Interfaces;
 using Dumb.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,30 +9,28 @@ namespace DumbThings.Controllers
     [Route("[controller]")]
     public class DumbThingsController : ControllerBase
     {
+        private readonly IServiceRequest _Joke;
+        private readonly IServiceRequest _CatFacts;
+        private readonly IServiceRequest _Bored;
+        private readonly IServiceRequest _RickAndMorty;
+        private readonly IServiceRequest _RandomDog;
+        private readonly ISupposeNameGenderAge _NameAndGender;
 
-        private readonly JokeService _jokeService;
-        private readonly CatFactService _catFactService;
-        private readonly RandomDogService _randomDogService;
-        private readonly BoredService _boredService;
-        private readonly NameAndGenderService _nameAndGenderService;
-        private readonly RickAndMortyService _rickAndMortyService;
-
-        public DumbThingsController(JokeService jokeService, CatFactService catFactService, RandomDogService randomDogService,
-            BoredService boredService, NameAndGenderService nameAndGenderService, RickAndMortyService rickAndMortyService)
+        public DumbThingsController(BaseService baseService)
         {
-            _jokeService = jokeService;
-            _catFactService = catFactService;
-            _randomDogService = randomDogService;
-            _boredService = boredService;
-            _nameAndGenderService = nameAndGenderService;
-            _rickAndMortyService = rickAndMortyService;
+            _Joke = new JokeService(baseService);
+            _CatFacts = new CatFactService(baseService);
+            _Bored = new BoredService(baseService);
+            _NameAndGender = new NameAndGenderService(baseService);
+            _RickAndMorty = new RickAndMortyService(baseService);
+            _RandomDog = new RandomDogService(baseService);
         }
 
         [HttpGet]
         [Route("GetJoke")]
         public IActionResult GetJoke()
         {
-            var result = _jokeService.InitializeAndLoad();
+            var result = _Joke.InitializeAndLoad();
 
             return StatusCode(result._StatusCode, result._Data == null ? new { Message = result._Message } : result._Data);
         }
@@ -40,7 +39,7 @@ namespace DumbThings.Controllers
         [Route("GetCatFacts")]
         public IActionResult GetCatFacts()
         {
-            var result = _catFactService.InitializeAndLoad();
+            var result = _CatFacts.InitializeAndLoad();
 
             return StatusCode(result._StatusCode, result._Data == null ? new { Message = result._Message } : result._Data);
         }
@@ -48,7 +47,7 @@ namespace DumbThings.Controllers
         [Route("GetRandomDog")]
         public IActionResult GetRandomDog()
         {
-            var result = _randomDogService.InitializeAndLoad();
+            var result = _RandomDog.InitializeAndLoad();
 
             return StatusCode(result._StatusCode, result._Data == null ? new { Message = result._Message } : result._Data);
         }
@@ -56,7 +55,7 @@ namespace DumbThings.Controllers
         [Route("GetBoredActivity")]
         public IActionResult GetActivity()
         {
-            var result = _boredService.InitializeAndLoad();
+            var result = _Bored.InitializeAndLoad();
 
             return StatusCode(result._StatusCode, result._Data == null ? new { Message = result._Message } : result._Data);
         }
@@ -65,7 +64,7 @@ namespace DumbThings.Controllers
         [Route("GetGenderAndAge")]
         public IActionResult GetGenderAge(UserToSupposeDto supposeDto)
         {
-            var result = _nameAndGenderService.InitializeAndLoad(supposeDto.Name);
+            var result = _NameAndGender.InitializeAndLoad(supposeDto.Name);
 
             return StatusCode(result._StatusCode, result._Data == null ? new { Message = result._Message } : result._Data);
         }
@@ -73,7 +72,7 @@ namespace DumbThings.Controllers
         [Route("GetRickAndMorty")]
         public IActionResult GetRickAndMorty()
         {
-            var result = _rickAndMortyService.InitializeAndLoad();
+            var result = _RickAndMorty.InitializeAndLoad();
 
             return StatusCode(result._StatusCode, result._Data);
         }
