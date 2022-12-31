@@ -29,7 +29,7 @@ a typical random internet site.
 
 ## Running Locally
 
-Cone the project
+Clone the project
 
 ```bash
   git clone https://github.com/VictorSantos09/DumbThings.git
