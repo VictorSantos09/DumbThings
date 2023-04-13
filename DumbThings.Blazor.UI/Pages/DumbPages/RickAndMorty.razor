@@ -1,0 +1,94 @@
+﻿@page "/DumbPages/RickAndMorty"
+
+@using Application.Dto;
+@using Dumb.Application
+@using Dumb.Application.Interfaces
+@using Dumb.Application.Services
+@using Dumb.Application.Dto
+@using System.Net.Http.Headers;
+@using Dumb.Domain.Entities;
+@using Dumb.Domain;
+
+@inject IBaseRequest _request
+
+<section class="d-flex justify-content-center my-margin-content">
+    <div class="my-background-color rounded-4">
+        <div class="d-flex justify-content-center pt-4 text-uppercase">
+            <h2>who am i?</h2>
+        </div>
+        <div class="m-5">
+            <div class="d-flex justify-content-center">
+                <img src="@CorrectChoiceImage" style="height: 300px;width:300px ;" id="rickAndMortyCaracter" alt="" srcset=""
+                     class="border-style">
+            </div>
+
+            <div class="pt-5">
+                <div class="form-check pb-3">
+                    <div class="border border-2 rounded-3 border-dark" id="spaceNameBox-1">
+                        <input class="form-check-input" type="radio" name="rickAndMortyOption"
+                               id="rickAndMortyOption1">
+                        <label class="form-check-label" for="rickAndMortyOption1">
+                            <h3 class="m-1" id="rickAndMortyOption-1">@Option1</h3>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-check pb-3">
+                    <div class="border border-2 rounded-3 border-dark" id="spaceNameBox-2">
+                        <input class="form-check-input" type="radio" name="rickAndMortyOption"
+                               id="rickAndMortyOption2">
+                        <label class="form-check-label" for="rickAndMortyOption2">
+                            <h3 class="m-1" id="rickAndMortyOption-2">@Option2</h3>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <div class="border border-2 rounded-3 border-dark" id="spaceNameBox-3">
+                        <input class="form-check-input" type="radio" name="rickAndMortyOption"
+                               id="rickAndMortyOption3">
+                        <label class="form-check-label" for="rickAndMortyOption3">
+                            <h3 class="m-1" id="rickAndMortyOption-3">@Option3</h3>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private string CorrectChoiceImage;
+    private string CorrectChoice;
+    private string Option1;
+    private string Option2;
+    private string Option3;
+
+    protected override async Task OnInitializedAsync()
+    {
+        List<RickAndMortyEntity> entities = new List<RickAndMortyEntity>();
+        var totalRequest = 3;
+        Random rand = new Random();
+
+        _request.InitializeClient();
+
+        for (int i = 0; i < totalRequest; i++)
+        {
+            var url = IEndPoints.RickAndMorty;
+            var index = rand.Next(IEndPoints.RickAndMortyTotalCharacters);
+
+            var request = $"{url}{index}";
+
+            var entity = await _request.LoadContent<RickAndMortyEntity>(request, new RickAndMortyEntity());
+
+            entities.Add(entity);
+        }
+
+        CorrectChoiceImage = entities.ElementAt(0).Image;
+        CorrectChoice = entities.ElementAt(0).Name;
+
+        Option1 = entities.ElementAt(0).Name;
+        Option2 = entities.ElementAt(1).Name;
+        Option3 = entities.ElementAt(2).Name;
+    }
+}
