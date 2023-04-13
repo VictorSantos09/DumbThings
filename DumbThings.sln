@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dumb.Application", "Dumb.Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dumb.Domain", "Dumb.Domain\Dumb.Domain.csproj", "{A47CA218-A4FA-473A-A1E6-F7F5176AA834}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DumbThings.Blazor.UI", "DumbThings.Blazor.UI\DumbThings.Blazor.UI.csproj", "{1F54179A-558F-49AA-8EC1-374C264EEF46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A47CA218-A4FA-473A-A1E6-F7F5176AA834}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A47CA218-A4FA-473A-A1E6-F7F5176AA834}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A47CA218-A4FA-473A-A1E6-F7F5176AA834}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F54179A-558F-49AA-8EC1-374C264EEF46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F54179A-558F-49AA-8EC1-374C264EEF46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F54179A-558F-49AA-8EC1-374C264EEF46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F54179A-558F-49AA-8EC1-374C264EEF46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

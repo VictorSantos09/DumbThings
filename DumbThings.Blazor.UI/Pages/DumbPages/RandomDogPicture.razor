@@ -1,0 +1,102 @@
+﻿@page "/DumbPages/RandomDogPicture"
+
+@using Application.Dto;
+@using Dumb.Application
+@using Dumb.Application.Interfaces
+@using Dumb.Application.Services
+@using Dumb.Application.Dto
+@using System.Net.Http.Headers;
+@using Dumb.Domain.Entities;
+
+@inject IBaseRequest _request
+
+<section class="container my-margin-content">
+    <div class="row pb-5">
+        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
+            <div class="img-size my-background-color border-style">
+                <img src="@Image1" alt="" srcset="" width="@ImgSize" height="@ImgSize">
+            </div>
+        </div>
+        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
+            <div class="img-size my-background-color border-style">
+                <img src="@Image2" alt="" srcset="" width="@ImgSize" height="@ImgSize">
+            </div>
+        </div>
+        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
+            <div class="img-size my-background-color border-style">
+                <img src="@Image3" alt="" srcset="" width="@ImgSize" height="@ImgSize">
+            </div>
+        </div>
+        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
+            <div class="img-size my-background-color border-style">
+                <img src="@Image4" alt="" srcset="" width="@ImgSize" height="@ImgSize">
+            </div>
+        </div>
+    </div>
+    <div class="row pb-5">
+        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
+            <div class="img-size my-background-color border-style">
+                <img src="@Image5" alt="" srcset="" width="@ImgSize" height="@ImgSize">
+            </div>
+        </div>
+        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
+            <div class="img-size my-background-color border-style">
+                <img src="@Image6" alt="" srcset="" width="@ImgSize" height="@ImgSize">
+            </div>
+        </div>
+        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
+            <div class="img-size my-background-color border-style">
+                <img src="@Image7" alt="" srcset="" width="@ImgSize" height="@ImgSize">
+            </div>
+        </div>
+        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
+            <div class="img-size my-background-color border-style">
+                <img src="@Image8" alt="" srcset="" width="@ImgSize" height="@ImgSize">
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <input type="button" value="See more" class="text-uppercase btn btn-outline-dark" id="seeMoreDogs" onclick="@OnInitializedAsync">
+    </div>
+</section>
+
+
+@code {
+    private int ImgSize = 300;
+
+    private string? Image1;
+    private string? Image2;
+    private string? Image3;
+    private string? Image4;
+    private string? Image5;
+    private string? Image6;
+    private string? Image7;
+    private string? Image8;
+    private string? Image9;
+    private string? Image10;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var totalImages = 10;
+        List<DogEntity> dogImages = new List<DogEntity>();
+        _request.InitializeClient();
+        for (int i = 0; i < totalImages; i++)
+        {
+            DogEntity dog = await _request.LoadContent<DogEntity>("https://dog.ceo/api/breeds/image/random", new DogEntity());
+            dogImages.Add(dog);
+        }
+
+        var arrayDogs = dogImages.ToArray();
+
+        Image1 = arrayDogs[0].Message;
+        Image2 = arrayDogs[1].Message;
+        Image3 = arrayDogs[2].Message;
+        Image4 = arrayDogs[3].Message;
+        Image5 = arrayDogs[4].Message;
+        Image6 = arrayDogs[5].Message;
+        Image7 = arrayDogs[6].Message;
+        Image8 = arrayDogs[7].Message;
+        Image9 = arrayDogs[8].Message;
+        Image10 = arrayDogs[9].Message;
+    }
+}

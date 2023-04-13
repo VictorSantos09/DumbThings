@@ -2,6 +2,11 @@
 {
     public class ApiHelper
     {
-        public static HttpClient ApiClient { get; set; }
+        public HttpClient ApiClient { get; set; }
+
+        public ApiHelper(HttpClient apiClient)
+        {
+            ApiClient = apiClient;
+        }
     }
 }
