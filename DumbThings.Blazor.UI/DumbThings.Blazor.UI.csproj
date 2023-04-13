@@ -7,8 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\DumbPages\RandomDogPicture.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\DumbPages\RandomDogPicture.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Dumb.Domain\Dumb.Domain.csproj" />
     <ProjectReference Include="..\DumbThings\DumbThings.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

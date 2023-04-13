@@ -1,6 +1,5 @@
 using Dumb.Application.Interfaces;
 using Dumb.Application.Services;
-using DumbThings.Blazor.UI.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -13,7 +12,6 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddTransient<IBaseRequest, BaseService>();
 builder.Services.AddHttpClient();
 

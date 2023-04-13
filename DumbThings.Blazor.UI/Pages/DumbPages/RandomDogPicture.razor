@@ -8,6 +8,8 @@
 @using System.Net.Http.Headers;
 @using Dumb.Domain.Entities;
 
+<link href="DumbThings.Blazor.UI\Pages\DumbPages\RandomDogPicture.razor.css" rel="stylesheet">
+
 @inject IBaseRequest _request
 
 <section class="container my-margin-content">
@@ -58,12 +60,14 @@
     <div class="d-flex justify-content-center">
         <input type="button" value="See more" class="text-uppercase btn btn-outline-dark" id="seeMoreDogs" onclick="@OnInitializedAsync">
     </div>
+
+    <div hidden="@HideLoading">
+        <h4 class="d-flex justify-content-center pt-3">Loading...</h4>
+    </div>
 </section>
 
 
 @code {
-    private int ImgSize = 300;
-
     private string? Image1;
     private string? Image2;
     private string? Image3;
@@ -72,31 +76,40 @@
     private string? Image6;
     private string? Image7;
     private string? Image8;
-    private string? Image9;
-    private string? Image10;
+    private bool HideLoading;
+    private int ImgSize = 300;
 
     protected override async Task OnInitializedAsync()
     {
-        var totalImages = 10;
+        var totalImages = 8;
+        HideLoading = false;
+
         List<DogEntity> dogImages = new List<DogEntity>();
         _request.InitializeClient();
+
         for (int i = 0; i < totalImages; i++)
         {
-            DogEntity dog = await _request.LoadContent<DogEntity>("https://dog.ceo/api/breeds/image/random", new DogEntity());
-            dogImages.Add(dog);
+            var validation = true;
+            while (validation)
+            {
+                DogEntity dog = await _request.LoadContent<DogEntity>("https://dog.ceo/api/breeds/image/random", new DogEntity());
+
+                if (string.IsNullOrEmpty(dog.Message) == false)
+                {
+                    dogImages.Add(dog);
+                    validation = false;
+                }
+            }
         }
 
-        var arrayDogs = dogImages.ToArray();
-
-        Image1 = arrayDogs[0].Message;
-        Image2 = arrayDogs[1].Message;
-        Image3 = arrayDogs[2].Message;
-        Image4 = arrayDogs[3].Message;
-        Image5 = arrayDogs[4].Message;
-        Image6 = arrayDogs[5].Message;
-        Image7 = arrayDogs[6].Message;
-        Image8 = arrayDogs[7].Message;
-        Image9 = arrayDogs[8].Message;
-        Image10 = arrayDogs[9].Message;
+        Image1 = dogImages.ElementAt(0).Message;
+        Image2 = dogImages.ElementAt(1).Message;
+        Image3 = dogImages.ElementAt(2).Message;
+        Image4 = dogImages.ElementAt(3).Message;
+        Image5 = dogImages.ElementAt(4).Message;
+        Image6 = dogImages.ElementAt(5).Message;
+        Image7 = dogImages.ElementAt(6).Message;
+        Image8 = dogImages.ElementAt(7).Message;
+        HideLoading = true;
     }
 }
