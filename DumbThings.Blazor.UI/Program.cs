@@ -2,6 +2,8 @@ using Dumb.Application.Interfaces;
 using Dumb.Application.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using MudBlazor.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddTransient<IBaseRequest, BaseService>();
 builder.Services.AddHttpClient();
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 app.UseCors("corsapp");

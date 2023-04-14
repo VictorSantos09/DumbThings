@@ -11,61 +11,38 @@
 
 @inject IBaseRequest _request
 
+
 <section class="d-flex justify-content-center my-margin-content">
-    <div class="my-background-color rounded-4">
-        <div class="d-flex justify-content-center pt-4 text-uppercase">
-            <h2>who am i?</h2>
-        </div>
-        <div class="m-5">
-            <div class="d-flex justify-content-center">
-                <img src="@CorrectChoiceImage" style="height: 300px;width:300px ;" id="rickAndMortyCaracter" alt="" srcset=""
-                     class="border-style">
-            </div>
 
-            <div class="pt-5">
-                <div class="form-check pb-3">
-                    <div class="border border-2 rounded-3 border-dark" id="spaceNameBox-1">
-                        <input class="form-check-input" type="radio" name="rickAndMortyOption"
-                               id="rickAndMortyOption1">
-                        <label class="form-check-label" for="rickAndMortyOption1">
-                            <h3 class="m-1" id="rickAndMortyOption-1">@Option1</h3>
-                        </label>
-                    </div>
-                </div>
+        <MudForm>
+        <h2>who am i?</h2>
+            <MudImage Src="@CorrectChoiceImage" Width="300" Height="300" Alt="Rick and Morty Random Caracter" Elevation="25" Class="rounded-lg ma-4" />
+            <MudRadioGroup @bind-SelectedOption="@SelectedOption">
+                <MudRadio Option="@("Radio 1")" Color="Color.Warning" onchange="@(() => CheckOption(Option1))">@Option1</MudRadio>
+                <MudRadio Option="@("Radio 2")" Color="Color.Warning" change="@(() => CheckOption(Option2))">@Option2</MudRadio>
+                <MudRadio Option="@("Radio 3")" Color="Color.Warning" change="@(() => CheckOption(Option3))">@Option3</MudRadio>
+            </MudRadioGroup>
+        </MudForm>
 
-                <div class="form-check pb-3">
-                    <div class="border border-2 rounded-3 border-dark" id="spaceNameBox-2">
-                        <input class="form-check-input" type="radio" name="rickAndMortyOption"
-                               id="rickAndMortyOption2">
-                        <label class="form-check-label" for="rickAndMortyOption2">
-                            <h3 class="m-1" id="rickAndMortyOption-2">@Option2</h3>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-check">
-                    <div class="border border-2 rounded-3 border-dark" id="spaceNameBox-3">
-                        <input class="form-check-input" type="radio" name="rickAndMortyOption"
-                               id="rickAndMortyOption3">
-                        <label class="form-check-label" for="rickAndMortyOption3">
-                            <h3 class="m-1" id="rickAndMortyOption-3">@Option3</h3>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div hidden="@HideLoading">
+        <h4 class="d-flex justify-content-center pt-3">Loading...</h4>
     </div>
 </section>
 
 @code {
-    private string CorrectChoiceImage;
-    private string CorrectChoice;
-    private string Option1;
-    private string Option2;
-    private string Option3;
+    private string CorrectChoiceImage { get; set; }
+    private string CorrectChoice { get; set; }
+    private string Option1 { get; set; }
+    private string Option2 { get; set; }
+    private string Option3 { get; set; }
+    private string BackgroundColor { get; set; } = "white";
+    private bool HideLoading { get; set; } = true;
+    private bool CheckedRadio { get; set; } = false;
+    private string SelectedOption;
 
     protected override async Task OnInitializedAsync()
     {
+        HideLoading = false;
         List<RickAndMortyEntity> entities = new List<RickAndMortyEntity>();
         var totalRequest = 3;
         Random rand = new Random();
@@ -84,11 +61,37 @@
             entities.Add(entity);
         }
 
-        CorrectChoiceImage = entities.ElementAt(0).Image;
-        CorrectChoice = entities.ElementAt(0).Name;
+        var correctChoice = rand.Next(totalRequest);
+        CorrectChoiceImage = entities.ElementAt(correctChoice).Image;
+        CorrectChoice = entities.ElementAt(correctChoice).Name;
 
         Option1 = entities.ElementAt(0).Name;
         Option2 = entities.ElementAt(1).Name;
         Option3 = entities.ElementAt(2).Name;
+
+        HideLoading = true;
+    }
+
+    private async Task<bool> CheckOption(string option)
+    {
+        var delay = 1000;
+        if (option == CorrectChoice && option != null)
+        {
+            BackgroundColor = "green";
+            await Task.Delay(delay);
+            BackgroundColor = "white";
+            await OnInitializedAsync();
+            CheckedRadio = false;
+            return true;
+        }
+        else
+        {
+            BackgroundColor = "red";
+            await Task.Delay(delay);
+            BackgroundColor = "white";
+            await OnInitializedAsync();
+            CheckedRadio = false;
+            return false;
+        }
     }
 }
