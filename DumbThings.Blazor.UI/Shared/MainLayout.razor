@@ -7,13 +7,18 @@
 <MudSnackbarProvider />
 
 <MudLayout>
+        <MudAppBar Color="Color.Warning">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        Welcome to DumbThings, Be free to explore and enjoy it!
+    </MudAppBar>
     <MudDrawer @bind-Open="@_drawerOpen">
-        <MudNavMenu>
+        <MudNavMenu Color="Color.Warning">
             <MudNavLink Href="/" Match="NavLinkMatch.All">DumbThings</MudNavLink>
             <MudNavMenu Color="Color.Warning" Bordered="true">
-                <MudNavGroup Title="Settings" Expanded="true">
-                    <MudNavLink Href="/users" Icon="@Icons.Material.Filled.Image">Random Dogs Images</MudNavLink>
-                    <MudNavLink Href="/security" Icon="@Icons.Material.Filled.Dashboard">Security</MudNavLink>
+                <MudNavGroup Title="Services" Expanded="true">
+                    <MudNavLink Href="/DumbPages/RandomDogPicture" Icon="@Icons.Material.Filled.Image">Random Dogs Images</MudNavLink>
+                    <MudNavLink Href="/DumbPages/RickAndMorty" Icon="@Icons.Material.Filled.Dashboard">Rick and Morty</MudNavLink>
+                    <MudNavLink Href="/DumbPages/Jokes" Icon="@Icons.Material.Filled.Dashboard">Jokes</MudNavLink>
                 </MudNavGroup>
             </MudNavMenu>
             <MudNavLink Href="https://github.com/VictorSantos09/DumbThings">

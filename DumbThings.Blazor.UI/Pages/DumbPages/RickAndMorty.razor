@@ -11,15 +11,24 @@
 
 @inject IBaseRequest _request
 
-<MudPaper Class="d-flex justify-content-center flex-grow-1 gap-4" Elevation="0">
+<MudPaper Class="d-flex justify-content-center" Elevation="0">
     <MudForm>
-        <h2 class="d-flex justify-content-center text-uppercase">who am i?</h2>
+        <h2 class="text-uppercase d-flex justify-content-center">who am i?</h2>
         <MudImage Src="@CorrectChoiceImage" Width="300" Height="300" Alt="Rick and Morty Random Caracter" Elevation="25" Class="rounded-lg ma-4" />
-        <MudRadioGroup @bind-SelectedOption="@SelectedOption" Class="row row-cols-auto">
-            <MudRadio Option="@("Radio 1")" Color="Color.Warning" onchange="@(() => CheckOption(Option1))">@Option1</MudRadio>
-            <MudRadio Option="@("Radio 2")" Color="Color.Warning" change="@(() => CheckOption(Option2))">@Option2</MudRadio>
-            <MudRadio Option="@("Radio 3")" Color="Color.Warning" change="@(() => CheckOption(Option3))">@Option3</MudRadio>
-        </MudRadioGroup>
+        <MudStack>
+            <MudButtonGroup Color="Color.Warning" Variant="Variant.Outlined" VerticalAlign="true">
+                <MudButton Elevation="4" OnClick="@(() => CheckOption(Option1))">@Option1</MudButton>
+                <MudButton OnClick="@(() => CheckOption(Option2))">@Option2</MudButton>
+                <MudButton OnClick="@(() => CheckOption(Option3))">@Option3</MudButton>
+            </MudButtonGroup>
+        </MudStack>
+
+
+        <MudItem md="100" xs="100">
+            <MudAlert Severity="Severity.Success" hidden="@HideCorrect" Variant="Variant.Filled" Square="true" Class="my-2">Correct choice, congrats! :)</MudAlert>
+            <MudAlert Severity="Severity.Warning" hidden="@HideWait" Variant="Variant.Filled" Square="true" Class="my-2">Wait the process to finish, stop annoying me</MudAlert>
+            <MudAlert Severity="Severity.Error" hidden="@HideWrong" Variant="Variant.Filled" Square="true" Class="my-2">Wrong choice my dude :(</MudAlert>
+        </MudItem>
     </MudForm>
 </MudPaper>
 
@@ -29,8 +38,10 @@
     private string Option1 { get; set; }
     private string Option2 { get; set; }
     private string Option3 { get; set; }
-    private string BackgroundColor { get; set; } = "white";
-    private string SelectedOption;
+    private bool HideCorrect { get; set; } = true;
+    private bool HideWrong { get; set; } = true;
+    private bool HideWait { get; set; } = true;
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -66,17 +77,17 @@
         var delay = 1000;
         if (option == CorrectChoice && option != null)
         {
-            BackgroundColor = "green";
+            HideCorrect = false;
             await Task.Delay(delay);
-            BackgroundColor = "white";
+            HideCorrect = true;
             await OnInitializedAsync();
             return true;
         }
         else
         {
-            BackgroundColor = "red";
+            HideWrong = false;
             await Task.Delay(delay);
-            BackgroundColor = "white";
+            HideWrong = true;
             await OnInitializedAsync();
             return false;
         }
