@@ -11,23 +11,17 @@
 
 @inject IBaseRequest _request
 
-
-<section class="d-flex justify-content-center my-margin-content">
-
-        <MudForm>
-        <h2>who am i?</h2>
-            <MudImage Src="@CorrectChoiceImage" Width="300" Height="300" Alt="Rick and Morty Random Caracter" Elevation="25" Class="rounded-lg ma-4" />
-            <MudRadioGroup @bind-SelectedOption="@SelectedOption">
-                <MudRadio Option="@("Radio 1")" Color="Color.Warning" onchange="@(() => CheckOption(Option1))">@Option1</MudRadio>
-                <MudRadio Option="@("Radio 2")" Color="Color.Warning" change="@(() => CheckOption(Option2))">@Option2</MudRadio>
-                <MudRadio Option="@("Radio 3")" Color="Color.Warning" change="@(() => CheckOption(Option3))">@Option3</MudRadio>
-            </MudRadioGroup>
-        </MudForm>
-
-    <div hidden="@HideLoading">
-        <h4 class="d-flex justify-content-center pt-3">Loading...</h4>
-    </div>
-</section>
+<MudPaper Class="d-flex justify-content-center flex-grow-1 gap-4" Elevation="0">
+    <MudForm>
+        <h2 class="d-flex justify-content-center text-uppercase">who am i?</h2>
+        <MudImage Src="@CorrectChoiceImage" Width="300" Height="300" Alt="Rick and Morty Random Caracter" Elevation="25" Class="rounded-lg ma-4" />
+        <MudRadioGroup @bind-SelectedOption="@SelectedOption" Class="row row-cols-auto">
+            <MudRadio Option="@("Radio 1")" Color="Color.Warning" onchange="@(() => CheckOption(Option1))">@Option1</MudRadio>
+            <MudRadio Option="@("Radio 2")" Color="Color.Warning" change="@(() => CheckOption(Option2))">@Option2</MudRadio>
+            <MudRadio Option="@("Radio 3")" Color="Color.Warning" change="@(() => CheckOption(Option3))">@Option3</MudRadio>
+        </MudRadioGroup>
+    </MudForm>
+</MudPaper>
 
 @code {
     private string CorrectChoiceImage { get; set; }
@@ -36,13 +30,10 @@
     private string Option2 { get; set; }
     private string Option3 { get; set; }
     private string BackgroundColor { get; set; } = "white";
-    private bool HideLoading { get; set; } = true;
-    private bool CheckedRadio { get; set; } = false;
     private string SelectedOption;
 
     protected override async Task OnInitializedAsync()
     {
-        HideLoading = false;
         List<RickAndMortyEntity> entities = new List<RickAndMortyEntity>();
         var totalRequest = 3;
         Random rand = new Random();
@@ -68,8 +59,6 @@
         Option1 = entities.ElementAt(0).Name;
         Option2 = entities.ElementAt(1).Name;
         Option3 = entities.ElementAt(2).Name;
-
-        HideLoading = true;
     }
 
     private async Task<bool> CheckOption(string option)
@@ -81,7 +70,6 @@
             await Task.Delay(delay);
             BackgroundColor = "white";
             await OnInitializedAsync();
-            CheckedRadio = false;
             return true;
         }
         else
@@ -90,7 +78,6 @@
             await Task.Delay(delay);
             BackgroundColor = "white";
             await OnInitializedAsync();
-            CheckedRadio = false;
             return false;
         }
     }
