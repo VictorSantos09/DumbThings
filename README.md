@@ -27,7 +27,7 @@ a typical random internet site.
 **Back-end:** C#, .NET
 
 
-## Running Locally
+## Running with Swagger by API Locally
 
 Clone the project
 
@@ -39,7 +39,14 @@ Open the page on Visual Studio Code with Live Server on
 
 Start The Server
 
-```bash
   Open Visual Studio and run the project
+
+## Running with Blazor Server Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/VictorSantos09/DumbThings.git
 ```
 
+Run the project with Blazor.UI as startup project.
