@@ -2,23 +2,25 @@
 using Dumb.Application.Interfaces;
 using System.Net;
 using System.Net.Http.Headers;
-using static Dumb.Domain.Entities.ApiHelper;
+using Dumb.Domain;
+using Dumb.Domain.Entities;
 
 namespace Dumb.Application.Services
 {
     public class BaseService : IBaseRequest
     {
+        private ApiHelper _apiHelper;
         public void InitializeClient()
         {
-            ApiClient = new HttpClient();
-            ApiClient.DefaultRequestHeaders.Accept.Clear();
-            ApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _apiHelper = new ApiHelper(new HttpClient());
+            _apiHelper.ApiClient.DefaultRequestHeaders.Accept.Clear();
+            _apiHelper.ApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
         public async Task<T> LoadContent<T>(string url, T entity)
         {
             System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            using (HttpResponseMessage response = await ApiClient.GetAsync(url))
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync(url))
             {
                 if (response.IsSuccessStatusCode)
                 {

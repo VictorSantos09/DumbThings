@@ -1,0 +1,97 @@
+﻿@page "/DumbPages/RickAndMorty"
+
+@using Application.Dto;
+@using Dumb.Application
+@using Dumb.Application.Interfaces
+@using Dumb.Application.Services
+@using Dumb.Application.Dto
+@using System.Net.Http.Headers;
+@using Dumb.Domain.Entities;
+@using Dumb.Domain;
+
+<PageTitle>Rick And Morty Game</PageTitle>
+
+@inject IBaseRequest _request
+
+<MudPaper Class="d-flex justify-content-center" Elevation="0">
+    <MudForm>
+        <h2 class="text-uppercase d-flex justify-content-center">who am i?</h2>
+        <MudImage Src="@CorrectChoiceImage" Width="300" Height="300" Alt="Rick and Morty Random Caracter" Elevation="25" Class="rounded-lg ma-4" />
+        <MudStack>
+            <MudButtonGroup Color="Color.Warning" Variant="Variant.Outlined" VerticalAlign="true">
+                <MudButton Elevation="4" OnClick="@(() => CheckOption(Option1))">@Option1</MudButton>
+                <MudButton OnClick="@(() => CheckOption(Option2))">@Option2</MudButton>
+                <MudButton OnClick="@(() => CheckOption(Option3))">@Option3</MudButton>
+            </MudButtonGroup>
+        </MudStack>
+
+
+        <MudItem md="100" xs="100">
+            <MudAlert Severity="Severity.Success" hidden="@HideCorrect" Variant="Variant.Filled" Square="true" Class="my-2">Correct choice, congrats! :)</MudAlert>
+            <MudAlert Severity="Severity.Warning" hidden="@HideWait" Variant="Variant.Filled" Square="true" Class="my-2">Wait the process to finish, stop annoying me</MudAlert>
+            <MudAlert Severity="Severity.Error" hidden="@HideWrong" Variant="Variant.Filled" Square="true" Class="my-2">Wrong choice my dude :(</MudAlert>
+        </MudItem>
+    </MudForm>
+</MudPaper>
+
+@code {
+    private string CorrectChoiceImage { get; set; }
+    private string CorrectChoice { get; set; }
+    private string Option1 { get; set; }
+    private string Option2 { get; set; }
+    private string Option3 { get; set; }
+    private bool HideCorrect { get; set; } = true;
+    private bool HideWrong { get; set; } = true;
+    private bool HideWait { get; set; } = true;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        List<RickAndMortyEntity> entities = new List<RickAndMortyEntity>();
+        var totalRequest = 3;
+        Random rand = new Random();
+
+        _request.InitializeClient();
+
+        for (int i = 0; i < totalRequest; i++)
+        {
+            var url = IEndPoints.RickAndMorty;
+            var index = rand.Next(IEndPoints.RickAndMortyTotalCharacters);
+
+            var request = $"{url}{index}";
+
+            var entity = await _request.LoadContent<RickAndMortyEntity>(request, new RickAndMortyEntity());
+
+            entities.Add(entity);
+        }
+
+        var correctChoice = rand.Next(totalRequest);
+        CorrectChoiceImage = entities.ElementAt(correctChoice).Image;
+        CorrectChoice = entities.ElementAt(correctChoice).Name;
+
+        Option1 = entities.ElementAt(0).Name;
+        Option2 = entities.ElementAt(1).Name;
+        Option3 = entities.ElementAt(2).Name;
+    }
+
+    private async Task<bool> CheckOption(string option)
+    {
+        var delay = 1000;
+        if (option == CorrectChoice && option != null)
+        {
+            HideCorrect = false;
+            await Task.Delay(delay);
+            HideCorrect = true;
+            await OnInitializedAsync();
+            return true;
+        }
+        else
+        {
+            HideWrong = false;
+            await Task.Delay(delay);
+            HideWrong = true;
+            await OnInitializedAsync();
+            return false;
+        }
+    }
+}

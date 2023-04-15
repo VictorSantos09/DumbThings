@@ -1,0 +1,90 @@
+﻿@page "/DumbPages/Jokes"
+
+@using Application.Dto;
+@using Dumb.Application
+@using Dumb.Application.Interfaces
+@using Dumb.Application.Services
+@using Dumb.Application.Dto
+@using System.Net.Http.Headers;
+@using Dumb.Domain.Entities;
+@using Dumb.Domain;
+
+@inject IBaseRequest _request
+
+<PageTitle>Dumb Jokes</PageTitle>
+
+<MudStack>
+    <MudPaper Class="pa-3">@Joke1</MudPaper>
+    <MudPaper Class="pa-3">@Joke2</MudPaper>
+    <MudPaper Class="pa-3">@Joke3</MudPaper>
+    <MudPaper Class="pa-3">@Joke4</MudPaper>
+    <MudPaper Class="pa-3">@Joke5</MudPaper>
+    <MudPaper Class="pa-3">@Joke6</MudPaper>
+    <MudPaper Class="pa-3">@Joke7</MudPaper>
+    <MudPaper Class="pa-3">@Joke8</MudPaper>
+</MudStack>
+
+<MudContainer Class="pt-5 d-flex justify-content-center">
+    <MudButton Disabled="@_processing" OnClick="Process" Variant="Variant.Filled" Color="Color.Warning">
+        @if (_processing)
+        {
+            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+            <MudText Class="ms-2">Loading</MudText>
+        }
+        else
+        {
+            <MudText>SEE MORE</MudText>
+        }
+    </MudButton>
+</MudContainer>
+@code {
+
+    private bool _processing = false;
+
+    async Task Process()
+    {
+        _processing = true;
+        await OnInitializedAsync();
+        _processing = false;
+    }
+
+    private string Joke1 { get; set; }
+    private string Joke2 { get; set; }
+    private string Joke3 { get; set; }
+    private string Joke4 { get; set; }
+    private string Joke5 { get; set; }
+    private string Joke6 { get; set; }
+    private string Joke7 { get; set; }
+    private string Joke8 { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var totalJokes = 8;
+        List<JokeEntity> jokes = new List<JokeEntity>();
+
+        _request.InitializeClient();
+        for (int i = 0; i < totalJokes; i++)
+        {
+            var validating = true;
+            while (validating)
+            {
+                var joke = await _request.LoadContent<JokeEntity>(IEndPoints.Joke, new JokeEntity());
+
+                if (joke != null)
+                {
+                    jokes.Add(joke);
+                    validating = false;
+                }
+            }
+        }
+
+        Joke1 = $"{jokes.ElementAt(0).Setup} - {jokes.ElementAt(0).Punchline}";
+        Joke2 = $"{jokes.ElementAt(1).Setup} - {jokes.ElementAt(1).Punchline}";
+        Joke3 = $"{jokes.ElementAt(2).Setup} - {jokes.ElementAt(2).Punchline}";
+        Joke4 = $"{jokes.ElementAt(3).Setup} - {jokes.ElementAt(3).Punchline}";
+        Joke5 = $"{jokes.ElementAt(4).Setup} - {jokes.ElementAt(4).Punchline}";
+        Joke6 = $"{jokes.ElementAt(5).Setup} - {jokes.ElementAt(5).Punchline}";
+        Joke7 = $"{jokes.ElementAt(6).Setup} - {jokes.ElementAt(6).Punchline}";
+        Joke8 = $"{jokes.ElementAt(7).Setup} - {jokes.ElementAt(7).Punchline}";
+    }
+}

@@ -1,0 +1,49 @@
+﻿@inherits LayoutComponentBase
+
+<PageTitle>DumbThings.Blazor.UI</PageTitle>
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+        <MudAppBar Color="Color.Warning">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        Welcome to DumbThings, Be free to explore and enjoy it!
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_drawerOpen">
+        <MudNavMenu Color="Color.Warning">
+            <MudNavLink Href="/" Match="NavLinkMatch.All">DumbThings</MudNavLink>
+            <MudNavMenu Color="Color.Warning" Bordered="true">
+                <MudNavGroup Title="Services" Expanded="true">
+                    <MudNavLink Href="/DumbPages/RandomDogPicture" Icon="@Icons.Material.Filled.Image">Random Dogs Images</MudNavLink>
+                    <MudNavLink Href="/DumbPages/RickAndMorty" Icon="@Icons.Material.Filled.Dashboard">Rick and Morty</MudNavLink>
+                    <MudNavLink Href="/DumbPages/Jokes" Icon="@Icons.Material.Filled.Dashboard">Jokes</MudNavLink>
+                </MudNavGroup>
+            </MudNavMenu>
+            <MudNavLink Href="https://github.com/VictorSantos09/DumbThings">
+                <MudButton Size="Size.Large"
+                           Target="_blank"
+                           Variant="Variant.Text"
+                           EndIcon="@Icons.Custom.Brands.GitHub"
+                           Color="Color.Warning"
+                           Match="NavLinkMatch.Prefix"
+                           Style="text-transform:none">
+                    GitHub
+                </MudButton>
+            </MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}

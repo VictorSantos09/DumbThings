@@ -1,0 +1,92 @@
+﻿@page "/DumbPages/RandomDogPicture"
+
+@using Application.Dto;
+@using Dumb.Application
+@using Dumb.Application.Interfaces
+@using Dumb.Application.Services
+@using Dumb.Application.Dto
+@using System.Net.Http.Headers;
+@using Dumb.Domain.Entities;
+
+<link href="DumbThings.Blazor.UI\Pages\DumbPages\RandomDogPicture.razor.css" rel="stylesheet">
+
+<PageTitle>Random Dogs Pictures</PageTitle>
+
+
+@inject IBaseRequest _request
+
+<MudContainer Class="pt-5">
+    <MudImage Src="@Image1" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image2" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image3" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image4" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image5" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image6" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image7" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image8" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+</MudContainer>
+
+<MudContainer Class="pt-5">
+    <MudButton Disabled="@_processing" OnClick="Process" Variant="Variant.Filled" Color="Color.Warning">
+        @if (_processing)
+        {
+            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+            <MudText Class="ms-2">Loading</MudText>
+        }
+        else
+        {
+            <MudText>SEE MORE</MudText>
+        }
+    </MudButton>
+</MudContainer>
+@code {
+    private bool _processing = false;
+
+    async Task Process()
+    {
+        _processing = true;
+        await OnInitializedAsync();
+        _processing = false;
+    }
+
+    private string? Image1;
+    private string? Image2;
+    private string? Image3;
+    private string? Image4;
+    private string? Image5;
+    private string? Image6;
+    private string? Image7;
+    private string? Image8;
+    private int ImgSize = 300;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var totalImages = 8;
+        List<DogEntity> dogImages = new List<DogEntity>();
+        _request.InitializeClient();
+
+        for (int i = 0; i < totalImages; i++)
+        {
+            var validation = true;
+            while (validation)
+            {
+                DogEntity dog = await _request.LoadContent<DogEntity>("https://dog.ceo/api/breeds/image/random", new DogEntity());
+
+                if (string.IsNullOrEmpty(dog.Message) == false)
+                {
+                    dogImages.Add(dog);
+                    validation = false;
+                }
+            }
+        }
+
+        Image1 = dogImages.ElementAt(0).Message;
+        Image2 = dogImages.ElementAt(1).Message;
+        Image3 = dogImages.ElementAt(2).Message;
+        Image4 = dogImages.ElementAt(3).Message;
+        Image5 = dogImages.ElementAt(4).Message;
+        Image6 = dogImages.ElementAt(5).Message;
+        Image7 = dogImages.ElementAt(6).Message;
+        Image8 = dogImages.ElementAt(7).Message;
+    }
+}
