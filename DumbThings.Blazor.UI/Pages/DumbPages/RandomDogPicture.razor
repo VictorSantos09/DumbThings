@@ -15,52 +15,18 @@
 
 @inject IBaseRequest _request
 
-<section class="container my-margin-content">
-    <div class="row pb-5">
-        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
-            <div class="img-size my-background-color border-style">
-                <img src="@Image1" alt="" srcset="" width="@ImgSize" height="@ImgSize">
-            </div>
-        </div>
-        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
-            <div class="img-size my-background-color border-style">
-                <img src="@Image2" alt="" srcset="" width="@ImgSize" height="@ImgSize">
-            </div>
-        </div>
-        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
-            <div class="img-size my-background-color border-style">
-                <img src="@Image3" alt="" srcset="" width="@ImgSize" height="@ImgSize">
-            </div>
-        </div>
-        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
-            <div class="img-size my-background-color border-style">
-                <img src="@Image4" alt="" srcset="" width="@ImgSize" height="@ImgSize">
-            </div>
-        </div>
-    </div>
-    <div class="row pb-5">
-        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
-            <div class="img-size my-background-color border-style">
-                <img src="@Image5" alt="" srcset="" width="@ImgSize" height="@ImgSize">
-            </div>
-        </div>
-        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
-            <div class="img-size my-background-color border-style">
-                <img src="@Image6" alt="" srcset="" width="@ImgSize" height="@ImgSize">
-            </div>
-        </div>
-        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
-            <div class="img-size my-background-color border-style">
-                <img src="@Image7" alt="" srcset="" width="@ImgSize" height="@ImgSize">
-            </div>
-        </div>
-        <div class="col-xxl-3 col-lg-3 col-md-12 d-flex justify-content-center pb-md-3 mb-3">
-            <div class="img-size my-background-color border-style">
-                <img src="@Image8" alt="" srcset="" width="@ImgSize" height="@ImgSize">
-            </div>
-        </div>
-    </div>
+<MudContainer Class="pt-5">
+    <MudImage Src="@Image1" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image2" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image3" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image4" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image5" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image6" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image7" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+    <MudImage Src="@Image8" Width="@ImgSize" Height="@ImgSize" Alt="" Elevation="25" Class="mt-3 mr-1 border-solid border-4 mud-border-warning" />
+</MudContainer>
 
+<MudContainer Class="pt-5">
     <MudButton Disabled="@_processing" OnClick="Process" Variant="Variant.Filled" Color="Color.Warning">
         @if (_processing)
         {
@@ -72,9 +38,7 @@
             <MudText>SEE MORE</MudText>
         }
     </MudButton>
-</section>
-
-
+</MudContainer>
 @code {
     private bool _processing = false;
 
