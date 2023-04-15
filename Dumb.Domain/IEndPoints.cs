@@ -13,6 +13,7 @@ namespace Dumb.Domain
         public static string Gender { get; private set; } = "https://api.genderize.io?name=";
         public static string Name { get; private set; } = "https://api.agify.io?name=";
         public static string RickAndMorty { get; private set; } = "https://rickandmortyapi.com/api/character/";
+        public static string RandomDog { get; private set; } = "https://dog.ceo/api/breeds/image/random";
         public static int RickAndMortyTotalCharacters { get; private set; } = 827;
     }
 }
