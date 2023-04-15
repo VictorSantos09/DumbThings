@@ -7,11 +7,11 @@
 @using Dumb.Application.Dto
 @using System.Net.Http.Headers;
 @using Dumb.Domain.Entities;
+@using Dumb.Domain;
 
 <link href="DumbThings.Blazor.UI\Pages\DumbPages\RandomDogPicture.razor.css" rel="stylesheet">
 
 <PageTitle>Random Dogs Pictures</PageTitle>
-
 
 @inject IBaseRequest _request
 
@@ -39,6 +39,7 @@
         }
     </MudButton>
 </MudContainer>
+
 @code {
     private bool _processing = false;
 
@@ -70,7 +71,7 @@
             var validation = true;
             while (validation)
             {
-                DogEntity dog = await _request.LoadContent<DogEntity>("https://dog.ceo/api/breeds/image/random", new DogEntity());
+                DogEntity dog = await _request.LoadContent<DogEntity>(IEndPoints.RandomDog, new DogEntity());
 
                 if (string.IsNullOrEmpty(dog.Message) == false)
                 {
