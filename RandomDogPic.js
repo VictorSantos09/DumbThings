@@ -1,7 +1,7 @@
 const elem = document.createElement("img");
 
 const GetRandomDog = async function (id) {
-    const req = await fetch("https://localhost:7205/DumbThings/GetRandomDog",
+    const req = await fetch("https://dog.ceo/api/breeds/image/random",
         {
             headers: {
                 'Accept': 'application/json',
