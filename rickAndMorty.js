@@ -12,13 +12,15 @@ const rickAndMortyRadio2 = document.getElementById("rickAndMortyOption2")
 const rickAndMortyRadio3 = document.getElementById("rickAndMortyOption3")
 
 const GetCaracter = async function (idImg) {
-
     CleanDivsAndUncheckRadio()
-    var character1 = MakeRandomIndex(maxCaracters)
-    var character2 = MakeRandomIndex(maxCaracters)
-    var character3 = MakeRandomIndex(maxCaracters)
+    let characters = []
+    let value = 0
 
-    const req = await fetch("https://rickandmortyapi.com/api/character/" + character1 + "," + character2 + "," + character3,
+    value = MakeRandomIndex(maxCaracters, characters)
+    characters.push(value)
+    console.log(characters.l);
+
+    const req = await fetch("https://rickandmortyapi.com/api/character/" + characters[0] + "," + characters[1] + "," + characters[2],
         {
             headers: {
                 'Accept': 'application/json',
@@ -29,26 +31,27 @@ const GetCaracter = async function (idImg) {
         })
 
     const result = await req.json();
-    console.log(result)
-
-    correct = result[0]
+    correct = result[MakeRandomIndex(3)]
 
     document.getElementById(idImg).setAttribute("src", correct.image)
     document.getElementById(idImg).setAttribute("alt", "image of " + correct.name)
 
     resultArray = [result[0].name, result[1].name, result[2].name]
 
-    var index0 = MakeRandomIndex(3)
-    var index1 = MakeRandomIndex(3)
-    var index2 = MakeRandomIndex(3)
-
-    rickAndMortyNameOption1 = document.getElementById("rickAndMortyOption-1").innerHTML = resultArray[index0]
-    rickAndMortyNameOption2 = document.getElementById("rickAndMortyOption-2").innerHTML = resultArray[index1]
-    rickAndMortyNameOption3 = document.getElementById("rickAndMortyOption-3").innerHTML = resultArray[index2]
+    rickAndMortyNameOption1 = document.getElementById("rickAndMortyOption-1").innerHTML = resultArray[MakeRandomIndex(3)]
+    rickAndMortyNameOption2 = document.getElementById("rickAndMortyOption-2").innerHTML = resultArray[MakeRandomIndex(3)]
+    rickAndMortyNameOption3 = document.getElementById("rickAndMortyOption-3").innerHTML = resultArray[MakeRandomIndex(3)]
 }
 
-function MakeRandomIndex(max) {
-    return Math.floor(Math.random() * max)
+function MakeRandomIndex(max, array = null) {
+
+    if (array == null)
+        return Math.floor(Math.random() * max)
+
+    else
+        do {
+            var value = Math.floor(Math.random() * max)
+        } while (array.includes(value) == false);
 }
 
 function CheckNameAndRecall(nameChoice, correctName, divId) {
