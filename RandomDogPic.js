@@ -8,11 +8,10 @@ const GetRandomDog = async function (id) {
                 'Content-Type': 'application/json'
             },
             method: "GET",
+            mode: "no-cors",
             body: JSON.stringify()
         })
-
     const result = await req.json();
-
     document.getElementById(id).setAttribute("src", result.message);
     document.getElementById(id).setAttribute("alt", "Random Dog Picture");
     document.getElementById(id).setAttribute("class", "img-size-dog d-block");
