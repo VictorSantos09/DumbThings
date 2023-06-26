@@ -14,11 +14,7 @@ const rickAndMortyRadio3 = document.getElementById("rickAndMortyOption3")
 const GetCaracter = async function (idImg) {
     CleanDivsAndUncheckRadio()
     let characters = []
-    let value = 0
-
-    value = MakeRandomIndex(maxCaracters, characters)
-    characters.push(value)
-    console.log(characters.l);
+    PopulateArray(characters)
 
     const req = await fetch("https://rickandmortyapi.com/api/character/" + characters[0] + "," + characters[1] + "," + characters[2],
         {
@@ -37,21 +33,13 @@ const GetCaracter = async function (idImg) {
     document.getElementById(idImg).setAttribute("alt", "image of " + correct.name)
 
     resultArray = [result[0].name, result[1].name, result[2].name]
-
-    rickAndMortyNameOption1 = document.getElementById("rickAndMortyOption-1").innerHTML = resultArray[MakeRandomIndex(3)]
-    rickAndMortyNameOption2 = document.getElementById("rickAndMortyOption-2").innerHTML = resultArray[MakeRandomIndex(3)]
-    rickAndMortyNameOption3 = document.getElementById("rickAndMortyOption-3").innerHTML = resultArray[MakeRandomIndex(3)]
+    rickAndMortyNameOption1 = document.getElementById("rickAndMortyOption-1").innerHTML = resultArray[0]
+    rickAndMortyNameOption2 = document.getElementById("rickAndMortyOption-2").innerHTML = resultArray[1]
+    rickAndMortyNameOption3 = document.getElementById("rickAndMortyOption-3").innerHTML = resultArray[2]
 }
 
-function MakeRandomIndex(max, array = null) {
-
-    if (array == null)
-        return Math.floor(Math.random() * max)
-
-    else
-        do {
-            var value = Math.floor(Math.random() * max)
-        } while (array.includes(value) == false);
+function MakeRandomIndex(max) {
+    return Math.floor(Math.random() * max)
 }
 
 function CheckNameAndRecall(nameChoice, correctName, divId) {
@@ -75,7 +63,18 @@ function CleanDivsAndUncheckRadio() {
     rickAndMortyRadio3.checked = false
 }
 
-rickAndMortyRadio1.addEventListener("click", () => CheckNameAndRecall(rickAndMortyNameOption1, correctName, "spaceNameBox-1"))
-rickAndMortyRadio2.addEventListener("click", () => CheckNameAndRecall(rickAndMortyNameOption2, correctName, "spaceNameBox-2"))
-rickAndMortyRadio3.addEventListener("click", () => CheckNameAndRecall(rickAndMortyNameOption3, correctName, "spaceNameBox-3"))
+function PopulateArray(characters) {
+    let maxNumbers = 3;
+    do {
+        let value = MakeRandomIndex(maxCaracters)
+        if (characters.includes(value) == false) {
+            characters.push(value)
+            maxNumbers--;
+        }
+    } while (maxNumbers > 0);
+}
+
+rickAndMortyRadio1.addEventListener("click", () => CheckNameAndRecall(rickAndMortyNameOption1, correct.name, "spaceNameBox-1"))
+rickAndMortyRadio2.addEventListener("click", () => CheckNameAndRecall(rickAndMortyNameOption2, correct.name, "spaceNameBox-2"))
+rickAndMortyRadio3.addEventListener("click", () => CheckNameAndRecall(rickAndMortyNameOption3, correct.name, "spaceNameBox-3"))
 GetCaracter("rickAndMortyCaracter")
