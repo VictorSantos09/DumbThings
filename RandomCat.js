@@ -1,18 +1,16 @@
 const elem = document.createElement("img");
 
 const GetRandomDog = async function (id) {
-    const req = await fetch("https://dog.ceo/api/breeds/image/random",
+    const req = await fetch("https://api.thecatapi.com/v1/images/search?",
         {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            method: "GET",
-            mode: "no-cors",
-            body: JSON.stringify()
+            method: "GET"
         })
-    const result = await req.json();
-    document.getElementById(id).setAttribute("src", result.message);
+    const result = await req.json()
+    document.getElementById(id).setAttribute("src", result[0].url)
     document.getElementById(id).setAttribute("alt", "Random Dog Picture");
     document.getElementById(id).setAttribute("class", "img-size-dog d-block");
 }
