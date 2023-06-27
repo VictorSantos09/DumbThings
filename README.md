@@ -4,49 +4,13 @@
 DumbThings is an entertainment website using external applications,
 a typical random internet site.
 
-## Functionalities
-
-- Responsivity
-- Back - End Integration
-- REST API
-
-
 ## Used APIs
 
-- Bored: https://www.boredapi.com/api/activity
-- RandomDog Pics: https://dog.ceo/api/breeds/image/random
-- Jokes: https://official-joke-api.appspot.com/random_joke
-- rick and morty: https://rickandmortyapi.com/documentation
+- Random Cat Images: https://developers.thecatapi.com/view-account/ylX4blBYT9FaoVd6OhvR?report=bOoHBz-8t
+- Jokes: https://icanhazdadjoke.com/api
+- Rick and Morty: https://rickandmortyapi.com/documentation
 
 
+## Running the Website
 
-## Utilized Stack
-
-**Front-end:** Bootstrap, HTML, CSS, JavaScript
-
-**Back-end:** C#, .NET
-
-
-## Running with Swagger by API Locally
-
-Clone the project
-
-```bash
-  git clone https://github.com/VictorSantos09/DumbThings.git
-```
-
-Open the page on Visual Studio Code with Live Server on
-
-Start The Server
-
-  Open Visual Studio and run the project
-
-## Running with Blazor Server Locally
-
-Clone the project
-
-```bash
-  git clone https://github.com/VictorSantos09/DumbThings.git
-```
-
-Run the project with Blazor.UI as startup project.
+Acess this link and enjoy https://dumbthings.vercel.app/index.html
