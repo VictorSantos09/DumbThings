@@ -3,16 +3,14 @@ var rickAndMortyNameOption2 = ""
 var rickAndMortyNameOption3 = ""
 var correct = ""
 var resultArray = []
+var amountReqRickMorty = 0
+const timeoutRequest = 600
 const maxCaracters = 826
 const divSpace1 = document.getElementById("spaceNameBox-1")
 const divSpace2 = document.getElementById("spaceNameBox-2")
 const divSpace3 = document.getElementById("spaceNameBox-3")
-const rickAndMortyRadio1 = document.getElementById("rickAndMortyOption1")
-const rickAndMortyRadio2 = document.getElementById("rickAndMortyOption2")
-const rickAndMortyRadio3 = document.getElementById("rickAndMortyOption3")
 
 const GetCaracter = async function (idImg) {
-    CleanDivsAndUncheckRadio()
     let characters = []
     PopulateArray(characters)
 
@@ -33,9 +31,9 @@ const GetCaracter = async function (idImg) {
     document.getElementById(idImg).setAttribute("alt", "image of " + correct.name)
 
     resultArray = [result[0].name, result[1].name, result[2].name]
-    rickAndMortyNameOption1 = document.getElementById("rickAndMortyOption-1").innerHTML = resultArray[0]
-    rickAndMortyNameOption2 = document.getElementById("rickAndMortyOption-2").innerHTML = resultArray[1]
-    rickAndMortyNameOption3 = document.getElementById("rickAndMortyOption-3").innerHTML = resultArray[2]
+    rickAndMortyNameOption1 = document.getElementById("rickAndMortyOption-1").innerHTML = 'A) ' + resultArray[0]
+    rickAndMortyNameOption2 = document.getElementById("rickAndMortyOption-2").innerHTML = 'B) ' + resultArray[1]
+    rickAndMortyNameOption3 = document.getElementById("rickAndMortyOption-3").innerHTML = 'C) ' + resultArray[2]
 }
 
 function MakeRandomIndex(max) {
@@ -43,24 +41,40 @@ function MakeRandomIndex(max) {
 }
 
 function CheckNameAndRecall(nameChoice, correctName, divId) {
-    if (nameChoice == correctName)
+    amountReqRickMorty++
+    if (nameChoice == correctName) {
         document.getElementById(divId).style.backgroundColor = 'green';
+        setTimeout(() => {
+            CleanDivs()
+        }, timeoutRequest);
+    }
 
-    else
+    else {
         document.getElementById(divId).style.backgroundColor = 'red'
+        setTimeout(() => {
+            CleanDivs()
+        }, timeoutRequest);
+    }
 
-    setTimeout(() => {
-        GetCaracter("rickAndMortyCaracter")
-    }, 1000);
+    if (amountReqRickMorty == 1) {
+        setTimeout(() => {
+            GetCaracter("rickAndMortyCaracter")
+            amountReqRickMorty = 0;
+        }, timeoutRequest);
+    }
 }
 
-function CleanDivsAndUncheckRadio() {
+function CleanDivs() {
     divSpace1.style.backgroundColor = 'white'
     divSpace2.style.backgroundColor = 'white'
     divSpace3.style.backgroundColor = 'white'
-    rickAndMortyRadio1.checked = false
-    rickAndMortyRadio2.checked = false
-    rickAndMortyRadio3.checked = false
+    divSpace1.classList.add('btn')
+    divSpace2.classList.add('btn')
+    divSpace3.classList.add('btn')
+
+    divSpace1.classList.add('btn-light')
+    divSpace2.classList.add('btn-light')
+    divSpace3.classList.add('btn-light')
 }
 
 function PopulateArray(characters) {
@@ -74,7 +88,7 @@ function PopulateArray(characters) {
     } while (maxNumbers > 0);
 }
 
-rickAndMortyRadio1.addEventListener("click", () => CheckNameAndRecall(rickAndMortyNameOption1, correct.name, "spaceNameBox-1"))
-rickAndMortyRadio2.addEventListener("click", () => CheckNameAndRecall(rickAndMortyNameOption2, correct.name, "spaceNameBox-2"))
-rickAndMortyRadio3.addEventListener("click", () => CheckNameAndRecall(rickAndMortyNameOption3, correct.name, "spaceNameBox-3"))
+divSpace1.addEventListener("click", () => CheckNameAndRecall(rickAndMortyNameOption1, correct.name, "spaceNameBox-1"))
+divSpace2.addEventListener("click", () => CheckNameAndRecall(rickAndMortyNameOption2, correct.name, "spaceNameBox-2"))
+divSpace3.addEventListener("click", () => CheckNameAndRecall(rickAndMortyNameOption3, correct.name, "spaceNameBox-3"))
 GetCaracter("rickAndMortyCaracter")
