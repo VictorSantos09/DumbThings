@@ -31,9 +31,9 @@ const GetCaracter = async function (idImg) {
     document.getElementById(idImg).setAttribute("alt", "image of " + correct.name)
 
     resultArray = [result[0].name, result[1].name, result[2].name]
-    rickAndMortyNameOption1 = document.getElementById("rickAndMortyOption-1").innerHTML = 'A) ' + resultArray[0]
-    rickAndMortyNameOption2 = document.getElementById("rickAndMortyOption-2").innerHTML = 'B) ' + resultArray[1]
-    rickAndMortyNameOption3 = document.getElementById("rickAndMortyOption-3").innerHTML = 'C) ' + resultArray[2]
+    rickAndMortyNameOption1 = document.getElementById("rickAndMortyOption-1").innerHTML = resultArray[0]
+    rickAndMortyNameOption2 = document.getElementById("rickAndMortyOption-2").innerHTML = resultArray[1]
+    rickAndMortyNameOption3 = document.getElementById("rickAndMortyOption-3").innerHTML =  resultArray[2]
 }
 
 function MakeRandomIndex(max) {
